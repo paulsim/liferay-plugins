@@ -1,3 +1,4 @@
+@import "compass";
 @import "mixins";
 
 @import url(custom_common.css);
@@ -69,8 +70,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 		.lfr-nav-item {
 			span, a {
 				@include ellipsis;
-
-				max-width: 300px;
 			}
 		}
 	}
@@ -105,6 +104,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 				> li {
 					> a {
 						margin: 0 5px 0 0;
+						padding: 6px 10px;
 
 						&:hover {
 							background-color: #2FA4F5;
@@ -165,10 +165,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 				> li {
 					background-color: $dockbarGradientStart;
 
-					@include respond-to(phone, tablet) {
-						background: transparent;
-					}
-
 					@include background-image(linear-gradient($dockbarGradientStart 0%, $dockbarGradientStart 47%, $dockbarGradientEnd 100%));
 				}
 			}
@@ -194,7 +190,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 					}
 				}
 
-				&.nav-add-controls ul.dropdown-menu {
+				&.nav-add-controls {
 					overflow: visible;
 
 					&.nav-add-controls-notice {
@@ -207,6 +203,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 						@include background-image(none);
 
 						> a {
+							background: #45CBF5;
 							line-height: inherit;
 							padding: 6px 8px;
 
@@ -215,7 +212,7 @@ $dockbarOpenGradientStart: #0EA6F9;
 								padding: 9px 15px;
 							}
 
-							&:focus, &:hover {
+							&:hover {
 								background: #5BBAE8;
 
 								@include respond-to(phone, tablet) {
@@ -224,14 +221,10 @@ $dockbarOpenGradientStart: #0EA6F9;
 							}
 
 							&.toggle-controls-link {
-								background: #80E000;
+								background: #92F545;
 
 								@include respond-to(phone, tablet) {
 									background: transparent;
-
-									&:focus, &:hover {
-										background: #2FA4F5;
-									}
 								}
 							}
 						}
@@ -314,10 +307,6 @@ $dockbarOpenGradientStart: #0EA6F9;
 				&.active > a {
 					background-color: $dockbarGradientStart;
 				}
-			}
-
-			* {
-				display: none;
 			}
 
 			> li > a {

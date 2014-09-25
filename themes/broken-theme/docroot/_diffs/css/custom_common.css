@@ -10,7 +10,6 @@
 	body {
 		color: #555;
 		font-weight: 200;
-		line-height: 3em;
 	}
 
 	a {
@@ -283,7 +282,7 @@
 					color: #FFF;
 
 					&.active, &.open {
-						background-color: #3EA9DB;
+						background-color: #F5AF45;
 					}
 
 					.user-avatar-image {
@@ -293,10 +292,10 @@
 				    }
 				}
 
-				.nav-collapse {
-					> .nav {
-						&.nav-add-controls, &.nav-navigation {
-							> li.dropdown ul.dropdown-menu {
+				.nav-collapse > .nav {
+					&.nav-add-controls, &.nav-navigation {
+						> li {
+							&.dropdown ul.dropdown-menu {
 								background: transparent;
 
 								@include respond-to(phone, tablet) {
@@ -304,105 +303,101 @@
 								}
 							}
 						}
+					}
 
-						@include respond-to(phone, tablet) {
-							&.nav-account-controls > li > a .nav-item-icon {
-								margin-top: 0;
+					@include respond-to(phone, tablet) {
+						&.nav-account-controls > li > a .nav-item-icon {
+							margin-top: 0;
+						}
+					}
+
+					> li {
+						> a {
+							color: #FFF;
+							line-height: 31px;
+
+							&:focus, &:hover {
+								color: #FFF;
 							}
 						}
 
-						> li {
-							> a {
+						&.active > a {
+							color: #FFF;
+
+							&, &:hover, &:focus {
+								background: #0066B3;
+							}
+						}
+					}
+
+					%dockbar-caret {
+						&, &:hover {
+							.caret {
+								border-bottom-color: #FFF;
+								border-top-color: #FFF;
+							}
+						}
+					}
+
+					li.dropdown {
+						> .dropdown-toggle {
+							@extend %dockbar-caret;
+						}
+
+						&.active, &.open {
+							> .dropdown-toggle {
+								background-color: #3EA9DB;
 								color: #FFF;
-								line-height: 31px;
+
+								@extend %dockbar-caret;
+							}
+						}
+
+						ul.dropdown-menu, .site-administration-menu {
+							border-width: 0;
+							margin: 0;
+
+							@include respond-to(phone, tablet) {
+								margin-top: 3px;
+							}
+
+							> li > a {
+								color: #FFF;
+								font-size: 0.9em;
+								font-weight: 300;
 
 								@include respond-to(phone, tablet) {
-									line-height: 20px;
+									font-size: 16px;
 								}
 
 								&:focus, &:hover {
-									color: #FFF;
+									background: #2FA4F5;
+
+									@include filter-gradient(#2FA4F5, #2FA4F5, vertical);
+								}
+
+								[class^="icon-"], [class*=" icon-"] {
+									margin-right: 3px;
+								}
+
+								.icon-spacer {
+									margin-right: 17px;
 								}
 							}
 
-							&.active > a {
-								color: #FFF;
-
-								&, &:hover, &:focus {
-									background: #0066B3;
-								}
+							li.active > a {
+								background: #3B6DCC;
 							}
 						}
 
-						%dockbar-caret {
-							&, &:hover {
-								.caret {
-									border-bottom-color: #FFF;
-									border-top-color: #FFF;
-								}
-							}
-						}
+						.dropdown-menu {
+							background: #009AE5;
+							max-height: 300px;
+							overflow-x: hidden;
+							overflow-y: auto;
 
-						li.dropdown {
-							> .dropdown-toggle {
-								@extend %dockbar-caret;
-							}
-
-							&.active, &.open {
-								> .dropdown-toggle {
-									background-color: #3EA9DB;
-									color: #FFF;
-
-									@extend %dockbar-caret;
-								}
-							}
-
-							ul.dropdown-menu, .site-administration-menu {
+							&:after, &:before {
 								border-width: 0;
-								margin: 0;
-
-								@include respond-to(phone, tablet) {
-									margin-top: 3px;
-								}
-
-								> li > a {
-									color: #FFF;
-									font-size: 0.9em;
-									font-weight: 300;
-
-									@include respond-to(phone, tablet) {
-										font-size: 16px;
-									}
-
-									&:focus, &:hover {
-										background: #2FA4F5;
-
-										@include filter-gradient(#2FA4F5, #2FA4F5, vertical);
-									}
-
-									[class^="icon-"], [class*=" icon-"] {
-										margin-right: 3px;
-									}
-
-									.icon-spacer {
-										margin-right: 17px;
-									}
-								}
-
-								li.active > a {
-									background: #3B6DCC;
-								}
-							}
-
-							.dropdown-menu {
-								background: #009AE5;
-								max-height: 300px;
-								overflow-x: hidden;
-								overflow-y: auto;
-
-								&:after, &:before {
-									border-width: 0;
-								}
 							}
 						}
 					}
