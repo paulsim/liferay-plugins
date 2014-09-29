@@ -1,5 +1,4 @@
 AUI().ready(
-	'datatype-xml',
 	'event',
 	'io',
 	'liferay-hudcrumbs',
@@ -25,26 +24,47 @@ AUI().ready(
 			signIn.plug(Liferay.SignInModal);
 		}
 
-		A.getBody().delegate('click', eventHandler, 'a.logo');
-
 		var eventHandler = function(event) {
 			event.preventDefault();
 			alert(event.currentTarget.attr('title'));
 		}
 
-		var createNewWindow = function (event) {
-			var newWindow = window.open (
-				poweredByLink.get('href'),
-				'Liferay',
-				'height=700, left=200, location=1, menubar=0, resizable=1, scrollbars=1, statusbar=1, toolbar=0, top=200, width=1000'
-			);
-			
+		var openLiferayWebsite = function (event) {
 			event.preventDefault();
+
+			var bodyNode = A.one(document.body);
+			var dialogLiferayWebsite = A.Node.create('<div class="dialogLiferayWebsite"><iframe src="http://www.liferay.com" width="100%" height="100%"></iframe></div>');
+
+			bodyNode.append(dialogLiferayWebsite);
+
+			panel = new A.Panel(
+				{
+					centered: true,
+					height: 400,
+					modal: true,
+					render: true,
+					srcNode: '.dialogLiferayWebsite',
+					visible: false,
+					width: 700,
+					zIndex: 99999,
+				}
+			);
+
+			panel.on(
+				'visibleChange',
+				function () {
+					if (panel.get('visible')) {
+						panel.destroy();
+					}
+				}
+			);
+
+			panel.show();
 		}
 
-		poweredByLink.on('click', createNewWindow);
-
 		var breadcrumbClickFunc = function (event) {
+			event.preventDefault();
+
 			var bodyNode = A.one(document.body);
 			var dialogPanelContent = A.Node.create('<div class="dialogPanelContent"></div>');
 			var getRequestConfig, ioRequest, panel;
@@ -65,7 +85,8 @@ AUI().ready(
 				}
 			);
 
-			panel.on('visibleChange',
+			panel.on(
+				'visibleChange',
 				function () {
 					if (panel.get('visible')) {
 						panel.destroy();
@@ -99,20 +120,12 @@ AUI().ready(
 			ioRequest = A.io(url, getRequestConfig);
 		};
 
-		if ( ! Liferay.ThemeDisplay.isSignedIn()) {
+		A.getBody().delegate('click', eventHandler, 'a.logo');
+		poweredByLink.on('click', openLiferayWebsite);
 
+		if ( ! Liferay.ThemeDisplay.isSignedIn()) {
 			if(siteBreadcrumbs) {
 				siteBreadcrumbs.delegate('click', breadcrumbClickFunc, '> .breadcrumb > li > a');
-
-				var breadcrumbs = A.all('#breadcrumbs > .breadcrumb > li > a');
-
-				if (breadcrumbs) {
-					breadcrumbs.each(
-						function (breadcrumb) {
-							breadcrumb.setAttribute('onclick', "return false");
-						}
-					)
-				}
 			}
 		}
 	}
